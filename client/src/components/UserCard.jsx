@@ -7,8 +7,11 @@ import IconButton from "@mui/material/IconButton";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-export default function UserCard({ user }) {
+export default function UserCard({ user, fetchUsers }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -73,6 +76,20 @@ export default function UserCard({ user }) {
     display: "inline-block",
   };
 
+  const notifySuccess = () => toast.success("User Successfully Deleted");
+  const notifyError = (message) => toast.error(message);
+
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`http://localhost:3000/api/users/${user.id}`);
+      notifySuccess();
+    } catch (error) {
+      notifyError(error);
+    } finally {
+      fetchUsers();
+    }
+  };
+
   return (
     <Card
       variant="outlined"
@@ -111,7 +128,7 @@ export default function UserCard({ user }) {
               onClose={handleClose}
             >
               <MenuItem onClick={handleClose}>Edit User</MenuItem>
-              <MenuItem onClick={handleClose}>Delete</MenuItem>
+              <MenuItem onClick={handleDelete}>Delete</MenuItem>
             </Menu>
           </Box>
         </Box>
@@ -161,6 +178,11 @@ export default function UserCard({ user }) {
           </Typography>
         </Box>
       </CardContent>
+      <ToastContainer
+        position="top-right"
+        autoClose={1250}
+        hideProgressBar={true}
+      />
     </Card>
   );
 }
