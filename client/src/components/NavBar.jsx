@@ -2,7 +2,6 @@ import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
 export default function NavBar() {
@@ -11,15 +10,15 @@ export default function NavBar() {
       <AppBar position="static" sx={{ backgroundColor: "#100b36" }}>
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
           <img
-            src="heliverse_logo.jpeg"
+            src="/heliverse_logo.jpeg"
             alt="Heliverse Logo"
             style={{ width: 100, height: 65, marginRight: 16 }}
           />
           <Box>
-            <Button color="inherit" sx={{ fontFamily: "Comic Sans MS" }}>
+            <Button color="inherit" sx={{ fontFamily: "Calibri" }}>
               Add User
             </Button>
-            <Button color="inherit" sx={{ fontFamily: "Comic Sans MS" }}>
+            <Button color="inherit" sx={{ fontFamily: "Calibri" }}>
               Create Team
             </Button>
           </Box>
