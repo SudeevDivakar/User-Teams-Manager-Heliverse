@@ -10,8 +10,10 @@ import MenuItem from "@mui/material/MenuItem";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 export default function UserCard({ user }) {
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -129,7 +131,9 @@ export default function UserCard({ user }) {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>Edit User</MenuItem>
+              <MenuItem onClick={() => navigate(`/editUser/${user.id}`)}>
+                Edit User
+              </MenuItem>
               <MenuItem onClick={handleDelete}>Delete</MenuItem>
             </Menu>
           </Box>
