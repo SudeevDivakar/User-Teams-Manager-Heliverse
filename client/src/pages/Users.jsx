@@ -62,9 +62,7 @@ export default function Users() {
           </Typography>
         ) : (
           currentUsers.map((user) => {
-            return (
-              <UserCard user={user} fetchUsers={fetchUsers} key={user.id} />
-            );
+            return <UserCard user={user} key={user.id} />;
           })
         )}
       </div>

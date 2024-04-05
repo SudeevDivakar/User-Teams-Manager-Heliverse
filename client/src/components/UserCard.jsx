@@ -11,7 +11,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function UserCard({ user, fetchUsers }) {
+export default function UserCard({ user }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -86,7 +86,9 @@ export default function UserCard({ user, fetchUsers }) {
     } catch (error) {
       notifyError(error);
     } finally {
-      fetchUsers();
+      setTimeout(() => {
+        window.location.reload();
+      }, 1250);
     }
   };
 

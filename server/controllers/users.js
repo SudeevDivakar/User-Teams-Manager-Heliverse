@@ -94,7 +94,7 @@ const removeUser = asyncHandler(async (req, res) => {
     res.status(200).json({ message: "User deleted successfully" });
   } else {
     res.status(500);
-    throw new Error("Failed to delete user");
+    throw new Error("FAILED TO DELETE USER");
   }
 });
 
