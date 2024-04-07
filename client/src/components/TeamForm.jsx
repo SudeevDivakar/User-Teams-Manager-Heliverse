@@ -63,7 +63,7 @@ export default function TeamForm() {
       } else {
         toast.success("Team created successfully");
         setTimeout(() => {
-          navigate("/");
+          navigate("/teams");
         }, 1250);
       }
     } catch (error) {
