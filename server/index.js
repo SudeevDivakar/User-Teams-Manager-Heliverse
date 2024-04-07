@@ -13,6 +13,8 @@ if (process.env.NODE_ENV !== "production") {
 //Require routes
 const users = require("./routes/users.js");
 
+const teams = require("./routes/teams.js");
+
 //Connect to MongoDB
 mongoose
   .connect(process.env.DB_URL)
@@ -38,6 +40,8 @@ app.use(express.urlencoded({ extended: false }));
 
 //Routes
 app.use("/api/users", users);
+
+app.use("/api/team", teams);
 
 //Start server
 app.listen(process.env.PORT, () => {
