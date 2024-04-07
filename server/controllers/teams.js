@@ -10,12 +10,21 @@ const getTeams = asyncHandler(async (req, res) => {
 
 const getTeam = asyncHandler(async (req, res) => {
   const { id } = req.params;
-  const team = await Team.find({ id: id });
-  if (team.length === 0) {
+  const team = await Team.findOne({ id: id });
+  if (!team) {
     res.status(404);
-    throw new Error("USER NOT FOUND");
+    throw new Error("TEAM NOT FOUND");
   } else {
-    res.json(team);
+    const usersDetails = [];
+    for (let userId of team.users) {
+      const user = await User.findOne({ id: userId });
+      if (!user) {
+        continue;
+      } else {
+        usersDetails.push(user);
+      }
+    }
+    res.json({ id: id, name: team.name, users: usersDetails });
   }
 });
 

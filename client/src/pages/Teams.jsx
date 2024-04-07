@@ -36,6 +36,12 @@ export default function Teams() {
     <>
       <CssBaseline />
       <NavBar />
+      <Typography
+        variant="h3"
+        sx={{ fontFamily: "Calibri", ml: 7, mt: 3, fontWeight: "bold" }}
+      >
+        Teams
+      </Typography>
       <div
         style={{
           display: "flex",

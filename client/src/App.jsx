@@ -4,6 +4,7 @@ import AddUser from "./pages/AddUser";
 import EditUser from "./pages/EditUser";
 import AddTeam from "./pages/AddTeam";
 import Teams from "./pages/Teams";
+import SingleTeam from "./pages/SingleTeam";
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
         <Route path="/editUser/:id" element={<EditUser />} />
         <Route path="/addTeam" element={<AddTeam />} />
         <Route path="/teams" element={<Teams />} />
+        <Route path="/team/:id" element={<SingleTeam />} />
       </Routes>
     </>
   );
