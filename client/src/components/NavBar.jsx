@@ -20,12 +20,30 @@ export default function NavBar() {
             <Button
               color="inherit"
               sx={{ fontFamily: "Calibri" }}
+              onClick={() => navigate("/")}
+            >
+              View Users
+            </Button>
+            <Button
+              color="inherit"
+              sx={{ fontFamily: "Calibri" }}
               onClick={() => navigate("/addUser")}
             >
               Add User
             </Button>
-            <Button color="inherit" sx={{ fontFamily: "Calibri" }}>
+            <Button
+              color="inherit"
+              sx={{ fontFamily: "Calibri" }}
+              onClick={() => navigate("/addTeam")}
+            >
               Create Team
+            </Button>
+            <Button
+              color="inherit"
+              sx={{ fontFamily: "Calibri" }}
+              onClick={() => navigate("/teams")}
+            >
+              View Teams
             </Button>
           </Box>
         </Toolbar>

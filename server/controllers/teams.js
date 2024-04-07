@@ -1,5 +1,6 @@
 //Requiring models
 const Team = require("../models/teamSchema.js");
+const User = require("../models/userSchema.js");
 const asyncHandler = require("express-async-handler");
 
 const getTeams = asyncHandler(async (req, res) => {
@@ -21,29 +22,43 @@ const getTeam = asyncHandler(async (req, res) => {
 const createTeam = asyncHandler(async (req, res) => {
   const { id, name, users } = req.body;
 
-  try {
-    const isTeamIdPresent = await Team.find({ id: id });
-    const isTeamNamePresent = await Team.find({ name: name });
-
-    if (isTeamIdPresent.length === 0) {
-      if (isTeamNamePresent.length === 0) {
-        const team = await Team.create({
-          id: id,
-          name: name,
-          users: users,
-        });
-        res.json(team);
-      } else {
-        res.status(400);
-        throw new Error("TEAM NAME ALREADY TAKEN");
-      }
-    } else {
-      res.status(400);
-      throw new Error("TeamID ALREADY TAKEN");
+  // Check if any of the users are not present in the User Model
+  for (const userId of users) {
+    const user = await User.find({ id: userId });
+    if (user.length === 0) {
+      return res.json({
+        error: true,
+        message: `User with ID ${userId} not present in database`,
+      });
     }
-  } catch (error) {
-    res.status(500).json({ message: "Internal Server Error" });
   }
+
+  // Check if the team ID is already taken
+  const isTeamIdPresent = await Team.findOne({ id: id });
+  if (isTeamIdPresent) {
+    return res.json({
+      error: true,
+      message: "Team ID already taken",
+    });
+  }
+
+  // Check if the team name is already taken
+  const isTeamNamePresent = await Team.findOne({ name: name });
+  if (isTeamNamePresent) {
+    return res.json({
+      error: true,
+      message: "Team Name already taken",
+    });
+  }
+
+  // All checks passed, create the team
+  const team = await Team.create({
+    id: id,
+    name: name,
+    users: users,
+  });
+
+  res.json(team);
 });
 
 module.exports = { getTeams, createTeam, getTeam };
