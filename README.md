@@ -1,7 +1,5 @@
 # Heliverse User/Team Manager
 
-To view project, click [here](https://heliverse-sudeev.vercel.app/)
-
 ## Overview
 
 Full Stack Web Development Assessment for the Heliverse Internship :D
